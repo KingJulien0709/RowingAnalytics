@@ -1,0 +1,9 @@
+ultralytics
+google-colab
+opencv-python
+numpy
+torch
+pickle-mixin
+matplotlib
+scipy
+random
