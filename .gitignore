@@ -1,3 +1,10 @@
 *.pickle
 *.pth
 *.onnx
+*.pt
+*.pth
+*.pkl
+*.avi
+*.pyc
+*.ipynb_checkpoints
+*.cpy
