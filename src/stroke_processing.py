@@ -1,8 +1,8 @@
 import numpy as np
-from scipy.signal import savgol_filter
 import torch
+from scipy.signal import savgol_filter
 
-KNEE_JOINT =  [[1, 2],[1, 0]]
+KNEE_JOINT =  torch.tensor([[1, 2],[1, 0]]) #right knee, left knee
 KNEE_KP = [[12, 14, 16], [11, 13, 15]]
 
 
@@ -16,7 +16,7 @@ def calculate_angles_for_joint(keyframes, angle_pairs):
 #using the most significant angle for stroke seperation
 def extract_stroke_segments(knee_angles, framerate):
   oversmoothed_window_lenth = round(1.25*framerate)
-  oversmoothing_knee_angles = savgol_filter(knee_angles.copy(), window_length=oversmoothed_window_lenth, polyorder=1) #additional smoothing for clear maxima and minima
+  oversmoothing_knee_angles = savgol_filter(knee_angles, window_length=oversmoothed_window_lenth, polyorder=1) #additional smoothing for clear maxima and minima
   dx = np.diff(oversmoothing_knee_angles)
   dxx = np.diff(dx)
   turn_points = np.where(np.diff(np.sign(dx)) != 0)[0]
@@ -36,7 +36,7 @@ def segment_strokes(keypoints, framerate, right=True):
   if not right:
     knee_kp = KNEE_KP[1]
   selected_joints_keyframes = keypoints[:,knee_kp]
-  knee_angles = calculate_angles_for_joint(selected_joints_keyframes, KNEE_JOINT)
+  knee_angles = calculate_angles_for_joint(selected_joints_keyframes, angle_pairs=KNEE_JOINT)
   start_indices = extract_stroke_segments(knee_angles,framerate) #TODO adjust function vor variable strokerate
   strokes = []
   for i in range(len(start_indices)-1):

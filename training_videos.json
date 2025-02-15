@@ -1,0 +1,16 @@
+{
+  "videos": [
+    {
+      "path": "videos/video1.mp4",
+      "label_id": 1
+    },
+    {
+      "path": "videos/video2.mp4",
+      "label_id": 2
+    },
+    {
+      "path": "videos/video3.mp4",
+      "label_id": 3
+    }
+  ]
+}

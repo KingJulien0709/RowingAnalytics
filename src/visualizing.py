@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import savgol_filter
+import cv2
 
 #function to plot a single stroke
 def plot_single_stroke(stroke,labels,frame_rate,normalize = False, derivativ=False):
@@ -17,3 +18,22 @@ def plot_single_stroke(stroke,labels,frame_rate,normalize = False, derivativ=Fal
       plt.plot(stroke[i])
   plt.legend(labels)
   plt.show()
+
+
+def image_to_video(np_array, output_path, frame_rate):  
+  print(np_array[0].shape)
+  height, width = np_array[0].shape[1:3]
+  size = (height, width)
+  # Define codec (MP4 or AVI)
+  fourcc = cv2.VideoWriter_fourcc(*'XVID')  # Use 'XVID' for .avi
+  # Initialize VideoWriter
+  out = cv2.VideoWriter(output_path, fourcc, frame_rate, size)
+  if not out.isOpened():
+      raise RuntimeError(f"Failed to open video writer. Check codec compatibility for {output_path}")
+  for frame in np_array:
+      frame = np.max(frame, axis=0)
+      norm_heatmap = cv2.normalize(frame.T, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+      # Apply colormap to convert grayscale to BGR
+      colored_heatmap = cv2.applyColorMap(norm_heatmap, cv2.COLORMAP_JET)
+      out.write(colored_heatmap)
+  out.release()

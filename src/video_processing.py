@@ -30,32 +30,3 @@ def get_relevant_normalized_keyframes(results, frame_rate, selected_joints, clea
   if clean_numbers:
     selected_joints_keyframes = clean_keypoints(selected_joints_keyframes)
   return selected_joints_keyframes
-
-
-def image_to_video(np_array, output_path, frame_rate):  
-  print(np_array[0].shape)
-  height, width = np_array[0].shape[1:3]
-  size = (width, height)
-  # Define codec (MP4 or AVI)
-  fourcc = cv2.VideoWriter_fourcc(*'avi1')  # Use 'XVID' for .avi
-
-  # Initialize VideoWriter
-  out = cv2.VideoWriter(output_path, fourcc, frame_rate, size)
-
-  if not out.isOpened():
-      raise RuntimeError(f"Failed to open video writer. Check codec compatibility for {output_path}")
-
-  for frame in np_array:
-      # Normalize heatmap (0 to 255)
-      frame = np.max(frame, axis=0)
-
-      norm_heatmap = cv2.normalize(frame, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
-
-      # Apply colormap to convert grayscale to BGR
-      colored_heatmap = cv2.applyColorMap(norm_heatmap, cv2.COLORMAP_JET)
-
-      # Write frame to video
-      out.write(colored_heatmap)
-
-    # Release video writer
-  out.release()
