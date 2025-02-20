@@ -30,3 +30,4 @@ def get_relevant_normalized_keyframes(results, frame_rate, selected_joints, clea
   if clean_numbers:
     selected_joints_keyframes = clean_keypoints(selected_joints_keyframes)
   return selected_joints_keyframes
+

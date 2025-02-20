@@ -1,0 +1,34 @@
+{
+  "class_labels": [
+    {
+      "id": 0,
+      "label": "Good stroke",
+      "description": "Stroke which can be classified as correct rowing stroke, without big errors",
+      "improvement": "Good work!"
+    },
+    {
+      "id": 1,
+      "label": "open back before legs",
+      "description": "During the drive the back/upper body is being opened too early.",
+      "improvement": "Wait until the legs have been pushed completely, then pull with upper body."
+    },
+    {
+      "id": 2,
+      "label": "mountain-rowing",
+      "description": "During the recovery the legs are moved forwards, although the arms are still bent and not prepared. This leads to a trajectory, where the hands will do a curve, to compensate for the missing space.",
+      "improvement": "Fully extend your arms first then bring upper body forward, then move with your legs forward."
+    },
+    {
+      "id": 3,
+      "label": "chest_push",
+      "description": "During the recovery the legs are pushing down, but the upper body stays forward and the hip angle between legs and upper body is getting sharper/smaller.",
+      "improvement": "Keep tension in the upper body and the hip angle constant during the leg drive."
+    },
+    {
+      "id": 4,
+      "label": "upper body not prepared",
+      "description": "During the upper body is being moved forward during the leg recovery. This can also include leaning forward at or shortly before the catch.",
+      "improvement": "After fully extending your arms, bring/move upper body completely forward, then only move with your legs forward. Keep the tension and your upper body stable during the leg recovery."
+    }
+  ]
+}
