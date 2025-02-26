@@ -4,6 +4,11 @@ from scipy.signal import savgol_filter
 
 KNEE_JOINT =  torch.tensor([[1, 2],[1, 0]]) #right knee, left knee
 KNEE_KP = [[12, 14, 16], [11, 13, 15]]
+HIP_JOINT = torch.tensor([[1, 2],[1, 0]]) #right hip, left hip
+HIP_KP = [[10, 12, 14], [9, 11, 13]]
+SHOULDER_JOINT = torch.tensor([[1, 2],[1, 0]]) #right shoulder, left shoulder
+SHOULDER_KP = [[6, 8, 10], [5, 7, 9]]
+
 
 
 def calculate_angles_for_joint(keyframes, angle_pairs):
@@ -42,3 +47,9 @@ def segment_strokes(keypoints, framerate, right=True):
   for i in range(len(start_indices)-1):
     strokes.append(keypoints[start_indices[i]:start_indices[i+1]])
   return strokes
+
+def get_relevant_angles(keypoints, right=True):
+  '''
+  Returns the angles of the knee, hip and shoulder joint for the right or left side
+  '''
+  #TODO: implement angle extraction for hip, shoulder and knee joint
